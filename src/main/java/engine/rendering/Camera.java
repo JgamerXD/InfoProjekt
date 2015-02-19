@@ -1,41 +1,34 @@
 package engine.rendering;
 
+import engine.entity.Entity;
+import engine.math.Vec2d;
+import engine.physics.AABB;
+
 /**
  * Created by Jan on 13.02.2015.
  */
 public class Camera {
-    float x;
-    float y;
-    //scale, since it is only 2D
-    float fov;
-
-    public Camera(float x, float y, float fov) {
-        this.x = x;
-        this.y = y;
-        this.fov = fov;
-    }
-
-    public float getX() {
-        return x;
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getFov() {
-        return fov;
-    }
-
-    public void setFov(float fov) {
-        this.fov = fov;
-    }
+	private Entity fokus;
+	private double scale;
+	public Camera(double scale,Entity fokus)
+	{
+		this.scale = scale;
+		this.fokus = fokus;
+	}
+	
+	public AABB getRenderArea(double aspect)
+	{
+		Vec2d pos = fokus.transform.pos;
+		return new AABB(-scale * aspect + pos.x,-scale + pos.y,scale * aspect + pos.x,scale + pos.y);
+	}
+	
+	public void setFokus(Entity entity)
+	{
+		fokus = entity;
+	}
+	
+	public void setScale(double scale)
+	{
+		this.scale = scale;
+	}
 }

@@ -1,6 +1,6 @@
 package engine.physics;
 
-import com.sun.javafx.geom.Vec2d;
+import engine.math.Vec2d;
 
 import java.io.Serializable;
 

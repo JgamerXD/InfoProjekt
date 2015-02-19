@@ -19,7 +19,7 @@ public class Engine {
     public void run()
     {
         Options.save();
-        Display display = new Display(Options.RES_X, Options.RES_Y, "It's Creepy");
+        Display display = new Display(Options.RES_X, Options.RES_Y, "Info Projekt");
         RenderContext renderTarget = display.getRenderContext();
 
         Time time = new Time(Options.SHOW_FPS);

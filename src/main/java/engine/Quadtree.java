@@ -1,11 +1,12 @@
 package engine;
 
 
-import com.sun.javafx.geom.Vec2d;
+import java.awt.geom.*;
 import engine.entity.Entity;
 import engine.entity.EntitySprite;
 import engine.physics.AABB;
 import engine.physics.Transform;
+import engine.math.Vec2d;
 
 import java.lang.Integer;
 import java.lang.String;
@@ -13,7 +14,6 @@ import java.lang.System;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 
 /**
  * Created by JgamerXD on 30.08.2014.

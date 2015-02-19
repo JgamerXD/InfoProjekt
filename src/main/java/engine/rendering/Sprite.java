@@ -1,6 +1,6 @@
 package engine.rendering;
 
-import com.sun.javafx.geom.Vec2d;
+import engine.math.Vec2d;
 import engine.entity.EntitySprite;
 import engine.physics.AABB;
 import engine.physics.Transform;

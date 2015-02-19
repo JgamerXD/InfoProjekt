@@ -27,8 +27,7 @@ public class RenderContext extends Bitmap
 
 
     public AABB getRenderArea() {
-        float aspect = getAspect();
-        return new AABB(0, 0, aspect * 2, 2);
+        return camera.getRenderArea(getAspect());
     }
 
     public void drawImage(Bitmap image, double xCenter, double yCenter, double width, double height) {

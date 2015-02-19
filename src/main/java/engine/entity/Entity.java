@@ -21,7 +21,7 @@ public class Entity {
 
     public boolean getFlag(String key)
     {
-        return flags.getOrDefault(key,false);
+       	return flags.getOrDefault(key, false);
     }
 
     public void update(Input input)

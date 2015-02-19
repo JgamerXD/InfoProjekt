@@ -1,6 +1,6 @@
 package engine.physics;
 
-import com.sun.javafx.geom.Vec2d;
+import engine.math.Vec2d;
 
 /**
  * Created by Jan on 14.02.2015.
