@@ -3,7 +3,7 @@ package engine;
 import engine.Input;
 import engine.rendering.RenderContext;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -40,7 +40,7 @@ public class Display extends Canvas {
         frame.add(this);
         frame.pack();
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
         frame.setTitle(title);

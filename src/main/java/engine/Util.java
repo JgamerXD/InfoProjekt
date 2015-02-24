@@ -18,6 +18,17 @@ public class Util {
         return val;
     }
 
+    public static int clamp(int val, int min, int max) {
+
+        if (val < min) {
+            return min;
+        }
+        if (val > max) {
+            return max;
+        }
+        return val;
+    }
+
     public String Rect2DToString(Rectangle2D r)
     {
         return (r.getMinX() + ", " + r.getMinY() + ", " + r.getMaxX() + ", " + r.getMaxY());

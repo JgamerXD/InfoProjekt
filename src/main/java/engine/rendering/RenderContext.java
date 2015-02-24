@@ -1,5 +1,6 @@
 package engine.rendering;
 
+import engine.math.Vec2d;
 import engine.physics.AABB;
 import engine.Util;
 
@@ -10,7 +11,7 @@ import java.awt.*;
  */
 public class RenderContext extends Bitmap
 {
-    private Camera camera;
+    private Camera camera = new Camera();
 
     public Camera getCamera() {
         return camera;
@@ -25,17 +26,27 @@ public class RenderContext extends Bitmap
         super(width, height);
     }
 
-
-    public AABB getRenderArea() {
-        return camera.getRenderArea(getAspect());
-    }
-
     public void drawImage(Bitmap image, double xCenter, double yCenter, double width, double height) {
         drawImage(image,xCenter,yCenter,width,height,-1.0,-1.0,1.0,1.0);
     }
 
-    public void drawImage(Bitmap image, double xCenter, double yCenter, double width, double height, double imageXStart, double imageYStart, double imageXEnd, double imageYEnd) {
-        System.out.printf("Image: %f, %f, %f, %f \n",imageXStart,imageYStart,imageXEnd,imageYEnd);
+    public AABB getRenderArea()
+    {
+        double aspect = getAspect();
+        return new AABB(-camera.scale * aspect + camera.translation.x,-camera.scale +camera. translation.y,
+                camera.scale * aspect + camera.translation.x,camera.scale + camera.translation.y);
+    }
+
+    public void drawImage(Bitmap image, double xCenter, double yCenter, double width, double height,
+                          double imageXStart, double imageYStart, double imageXEnd, double imageYEnd) {
+        //Apply Camera
+        width = width / camera.scale;
+        height = height / camera.scale;
+        Vec2d trans = camera.translation;
+        xCenter = (xCenter - trans.x) / camera.scale;
+        yCenter = (yCenter - trans.y) / camera.scale;
+
+
         //Begin clipping logic
         imageXStart = Util.clamp(imageXStart, -1.0, 1.0);
         imageYStart = Util.clamp(imageYStart, -1.0, 1.0);
@@ -43,7 +54,7 @@ public class RenderContext extends Bitmap
         imageYEnd = Util.clamp(imageYEnd, -1.0, 1.0);
 
         //Position auf Ziel
-        double xStart = xCenter - width / getAspect() / 2.0f;    //Left
+        double xStart = xCenter / getAspect() - width / getAspect() / 2.0f;    //Left
         double yStart = yCenter - height / 2.0f;                 //Bottom
         double xEnd = xStart + width / getAspect();              //Right
         double yEnd = yStart + height;                           //Top

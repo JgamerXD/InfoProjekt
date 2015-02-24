@@ -13,6 +13,11 @@ public class Spritesheet {
         this.columns = columns;
     }
 
+    public int getSprites()
+    {
+        return rows * columns;
+    }
+
     private double getXStart(int index)
     {
         if(index%columns == 0)

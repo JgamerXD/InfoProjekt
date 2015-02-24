@@ -8,26 +8,40 @@ import engine.physics.AABB;
  * Created by Jan on 13.02.2015.
  */
 public class Camera {
-	private Entity fokus;
-	private double scale;
-	public Camera(double scale,Entity fokus)
+	Vec2d translation;
+	double scale;
+
+    public Camera() {
+        translation = new Vec2d(0,0);
+        scale = 1;
+    }
+
+    public Camera(double scale) {
+        this.scale = scale;
+        translation = new Vec2d(0,0);
+    }
+
+    public Camera(double scale,Vec2d translation)
 	{
 		this.scale = scale;
-		this.fokus = fokus;
+        this.translation = translation;
 	}
-	
-	public AABB getRenderArea(double aspect)
-	{
-		Vec2d pos = fokus.transform.pos;
-		return new AABB(-scale * aspect + pos.x,-scale + pos.y,scale * aspect + pos.x,scale + pos.y);
-	}
-	
-	public void setFokus(Entity entity)
-	{
-		fokus = entity;
-	}
-	
-	public void setScale(double scale)
+
+    public Vec2d getTranslation()
+    {
+        return translation;
+    }
+
+    public double getScale()
+    {
+        return scale;
+    }
+
+    public void setTranslation(Vec2d translation) {
+        this.translation = translation;
+    }
+
+    public void setScale(double scale)
 	{
 		this.scale = scale;
 	}

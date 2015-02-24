@@ -5,7 +5,7 @@ package engine;
  */
 public class Time {
 
-    public static final long SECOND = 100000000l;
+    public static final long SECOND = 1000000000l;
 
     float secTimer = 0;
     int frameCounter = 0;
