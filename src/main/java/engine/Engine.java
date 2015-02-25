@@ -8,6 +8,8 @@ import engine.Time;
 import engine.rendering.Camera;
 import engine.rendering.RenderContext;
 
+import javax.swing.*;
+
 /**
  * Created by JgamerXD on 30.08.2014.
  */
@@ -25,7 +27,7 @@ public class Engine {
     public void run()
     {
         Options.save();
-        Display display = new Display(Options.RES_X, Options.RES_Y, "Info Projekt");
+        Display display = new Display(JPanel,Options.RES_X, Options.RES_Y, "Info Projekt");
         RenderContext renderTarget = display.getRenderContext();
 
         if(cam != null)

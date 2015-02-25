@@ -8,10 +8,13 @@ import engine.physics.AABB;
 import engine.physics.Transform;
 import engine.rendering.*;
 
+import java.awt.*;
+import java.awt.image.renderable.*;
 import java.util.HashSet;
 import java.util.Set;
 
 import engine.math.Vec2d;
+import engine.rendering.RenderContext;
 import game.welt.Tileset;
 
 /**
@@ -54,7 +57,6 @@ public class Spiel implements Game {
 
     @Override
     public void render(RenderContext ctx) {
-        ctx.clear((byte)0xA0);
         Set<EntitySprite> renderable = new HashSet<>();
 
         tree.queryRange(new AABB(-1,-1,1,1),renderable);

@@ -4,14 +4,16 @@ import engine.math.Vec2d;
 import engine.physics.AABB;
 import engine.Util;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
  * Created by JgamerXD on 24.08.2014.
  */
-public class RenderContext extends Bitmap
+public class RenderContext
 {
     private Camera camera = new Camera();
+    public Graphics2D g2d;
 
     public Camera getCamera() {
         return camera;
@@ -32,7 +34,7 @@ public class RenderContext extends Bitmap
 
     public AABB getRenderArea()
     {
-        double aspect = getAspect();
+        double aspect = g2d.getTransform().;
         return new AABB(-camera.scale * aspect + camera.translation.x,-camera.scale +camera. translation.y,
                 camera.scale * aspect + camera.translation.x,camera.scale + camera.translation.y);
     }
@@ -178,5 +180,9 @@ public class RenderContext extends Bitmap
                 safeDrawPixel(i, j, a, b, g, r);
             }
         }
+    }
+
+    public void setGraphics(Graphics2D graphics) {
+        this.g2d = graphics;
     }
 }

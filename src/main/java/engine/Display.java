@@ -1,6 +1,7 @@
 package engine;
 
 import engine.Input;
+import engine.rendering.GameCanvas;
 import engine.rendering.RenderContext;
 
 import javax.swing.*;
@@ -17,14 +18,14 @@ import java.awt.image.DataBufferByte;
 public class Display extends Canvas {
 
     private final JFrame            frame;
-    private final RenderContext renderContext;
-    private final BufferedImage     displayImage;
-    private final byte[]            displayComponents;
+    private final RenderContext     renderContext;
+//    private final BufferedImage     displayImage;
+//    private final byte[]            displayComponents;
     private final BufferStrategy    bufferStrategy;
     private final Graphics          graphics;
     private final Input input;
 
-    public Display(int width, int height, String title)
+    public Display(Game game,int width, int height, String title)
     {
         Dimension size = new Dimension(width, height);
         setPreferredSize(size);
@@ -32,12 +33,12 @@ public class Display extends Canvas {
         setMaximumSize(size);
 
         renderContext = new RenderContext(width, height);
-        displayImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
-
-        displayComponents = ((DataBufferByte)displayImage.getRaster().getDataBuffer()).getData();
+//        displayImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+//
+//        displayComponents = ((DataBufferByte)displayImage.getRaster().getDataBuffer()).getData();
 
         frame = new JFrame();
-        frame.add(this);
+        frame.add(new GameCanvas());
         frame.pack();
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -70,6 +71,7 @@ public class Display extends Canvas {
 
     public void swapBuffers()
     {
+
         renderContext.copyToByteArray(displayComponents);
         graphics.drawImage(displayImage, 0, 0, getWidth(), getHeight(), null);
         bufferStrategy.show();
