@@ -10,7 +10,7 @@ public class main {
     public static void main(String[] args)
     {
         Engine engine = new Engine(new Spiel());
-        engine.setCamera(new Camera(10,new Vec2d(8.0,4.0)));
+        engine.setCamera(new Camera(5,new Vec2d(8.0,4.0)));
         engine.run();
     }
 }

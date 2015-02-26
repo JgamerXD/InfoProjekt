@@ -2,9 +2,6 @@ package engine.physics;
 
 import engine.math.Vec2d;
 
-/**
- * Created by JgamerXD on 30.08.2014.
- */
 public class AABB implements Shape {
 
     public double minX,minY,maxX,maxY;
