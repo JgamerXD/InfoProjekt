@@ -2,9 +2,11 @@ package engine;
 
 
 import java.awt.geom.*;
+
 import engine.entity.Entity;
 import engine.entity.EntitySprite;
 import engine.physics.AABB;
+import engine.physics.PhysicsObject;
 import engine.physics.Transform;
 import engine.math.Vec2d;
 
@@ -14,11 +16,12 @@ import java.lang.System;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * Created by JgamerXD on 30.08.2014.
  */
-public class Quadtree {
+public class Quadtree<T extends IQuadtreeObject> {
     public static final int MAX_ENTITYS = 5;
     public static final int NW = 0;
     public static final int NE = 1;
@@ -26,7 +29,7 @@ public class Quadtree {
     public static final int SE = 3;
 
 
-    private List<EntitySprite> objects;
+    private List<T> objects;
     private Quadtree[] nodes;
     private AABB bound;
     private boolean hasSubnodes;
@@ -42,7 +45,7 @@ public class Quadtree {
         hasSubnodes = false;
     }
 
-    public void addEntity(EntitySprite entity)
+    public void addEntity(T entity)
     {
         AABB eaabb = entity.getAABB();
         if(bound.contains(eaabb))
@@ -51,14 +54,14 @@ public class Quadtree {
             {
                 if(!hasSubnodes)
                 {
-                    List<EntitySprite> objectsToRemove = new ArrayList<>();
-                    for(EntitySprite e : objects)
+                    List<T> objectsToRemove = new ArrayList<>();
+                    for(T e : objects)
                     {
                         if(pushToChild(e))
                             objectsToRemove.add(e);
 
                     }
-                    for(EntitySprite e : objectsToRemove)
+                    for(T e : objectsToRemove)
                     {
                         objects.remove(e);
                     }
@@ -93,7 +96,7 @@ public class Quadtree {
     * @param e: Entity to push
     * @return : success
     */
-    private boolean pushToChild(EntitySprite e)
+    private boolean pushToChild(T e)
     {
         int pos = getChildIndex(e.getAABB());
 
@@ -140,9 +143,9 @@ public class Quadtree {
         return -1;
     }
 
-    public void queryRange(AABB bounds, Set<EntitySprite> result)
+    public void queryRange(AABB bounds, Set<T> result)
     {
-        for(EntitySprite e : objects)
+        for(T e : objects)
         {
             if(e.getAABB().intersects(bounds))
                 result.add(e);
@@ -159,34 +162,34 @@ public class Quadtree {
         }
     }
 
-//    public void getAll(Set<Entity> result)
-//    {
-//        result.addAll(objects);
-//        if(hasSubnodes){
-//            if(nodes[0] != null)
-//                nodes[0].getAll(result);
-//            if(nodes[1] != null)
-//                nodes[1].getAll(result);
-//            if(nodes[2] != null)
-//                nodes[2].getAll(result);
-//            if(nodes[3] != null)
-//                nodes[3].getAll(result);
-//        }
-//    }
+    public void getAll(Set<T> result)
+    {
+        result.addAll(objects);
+        if(hasSubnodes){
+            if(nodes[0] != null)
+                nodes[0].getAll(result);
+            if(nodes[1] != null)
+                nodes[1].getAll(result);
+            if(nodes[2] != null)
+               nodes[2].getAll(result);
+            if(nodes[3] != null)
+                nodes[3].getAll(result);
+        }
+    }
 
-//    public void get(Predicate<Entity> condition, Set<Entity> result) {
-//        objects.stream().filter(condition).forEach(result::add);
-//        if(hasSubnodes){
-//            if(nodes[0] != null)
-//                nodes[0].get(condition, result);
-//            if(nodes[1] != null)
-//                nodes[1].get(condition, result);
-//            if(nodes[2] != null)
-//                nodes[2].get(condition, result);
-//            if(nodes[3] != null)
-//                nodes[3].get(condition, result);
-//        }
-//    }
+    public void get(Predicate<T> condition, Set<T> result) {
+        objects.stream().filter(condition).forEach(result::add);
+        if(hasSubnodes){
+            if(nodes[0] != null)
+                nodes[0].get(condition, result);
+            if(nodes[1] != null)
+                nodes[1].get(condition, result);
+            if(nodes[2] != null)
+                nodes[2].get(condition, result);
+            if(nodes[3] != null)
+                nodes[3].get(condition, result);
+        }
+    }
 //
 //    public void remove(Predicate<Entity> condition)
 //    {
