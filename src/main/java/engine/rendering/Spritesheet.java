@@ -1,13 +1,15 @@
 package engine.rendering;
 
+import java.awt.*;
+
 /**
  * Created by Jan on 15.02.2015.
  */
 public class Spritesheet {
-    Bitmap image;
+    Image image;
     int rows,columns;
 
-    public Spritesheet(Bitmap image, int rows, int columns) {
+    public Spritesheet(Image image, int rows, int columns) {
         this.image = image;
         this.rows = rows;
         this.columns = columns;
@@ -18,25 +20,25 @@ public class Spritesheet {
         return rows * columns;
     }
 
-    private double getXStart(int index)
+    private int getXStart(int index)
     {
         if(index%columns == 0)
             return 0;
-        return (double)(index % columns) / columns;
+        return (int)((double)(index % columns) / columns * image.getHeight(null));
     }
-    private double getXEnd(int index)
+    private int getXEnd(int index)
     {
-        return (index % columns + 1.0) / columns;
+        return (int)((index % columns + 1.0) / columns * image.getWidth(null));
     }
-    private double getYStart(int index)
+    private int getYStart(int index)
     {
         if((int)index/ rows == 0)
             return 0;
-        return Math.floor(index / columns) / rows;
+        return (int)(Math.floor(index / columns) / rows * image.getHeight(null));
     }
-    private double getYEnd(int index)
+    private int getYEnd(int index)
     {
-        return Math.floor(index / columns + 1.0) / rows;
+        return (int)(Math.floor(index / columns + 1.0) / rows * image.getWidth(null));
     }
 
     public void draw(int i,RenderContext ctx,double xCenter, double yCenter, double width, double height)

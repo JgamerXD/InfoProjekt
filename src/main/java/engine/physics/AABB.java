@@ -2,6 +2,8 @@ package engine.physics;
 
 import engine.math.Vec2d;
 
+import java.awt.*;
+
 /**
  * Created by JgamerXD on 30.08.2014.
  */
@@ -23,6 +25,14 @@ public class AABB implements Shape {
         this.minY = other.minY;
         this.maxX = other.maxX;
         this.maxY = other.maxY;
+    }
+
+    public AABB(Rectangle other)
+    {
+        this.minX = other.getMinX();
+        this.minY = other.getMinX();
+        this.maxX = other.getMaxX();
+        this.maxY = other.getMaxY();
     }
 
     public AABB(double minX, double minY, double maxX, double maxY) {

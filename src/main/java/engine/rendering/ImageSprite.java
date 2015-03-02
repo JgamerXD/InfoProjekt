@@ -2,24 +2,23 @@ package engine.rendering;
 
 import engine.entity.EntitySprite;
 
+import java.awt.*;
+
 /**
  * Created by Jan on 16.02.2015.
  */
-public class BitmapSprite extends Sprite{
-    Bitmap bitmap;
+public class ImageSprite extends Sprite{
+    Image image;
 
-    public BitmapSprite(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public ImageSprite(Image image) {
+        this.image = image;
     }
 
-
-    @Override
     public void update(EntitySprite entity) {
 
     }
 
-    @Override
     public void draw(RenderContext ctx, double xCenter, double yCenter, double width, double height) {
-        ctx.drawImage(bitmap,xCenter,yCenter,width,height);
+        ctx.getG2d().drawImage(image,(int)xCenter,(int)yCenter,(int)width,(int)height,null);
     }
 }

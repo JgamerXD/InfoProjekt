@@ -27,18 +27,17 @@ public class Engine {
     public void run()
     {
         Options.save();
-        Display display = new Display(JPanel,Options.RES_X, Options.RES_Y, "Info Projekt");
-        RenderContext renderTarget = display.getRenderContext();
+        Display display = new Display(game,Options.RES_X, Options.RES_Y, "Info Projekt");
 
         if(cam != null)
-            renderTarget.setCamera(cam);
+            display.cam = cam;
 
         Time time = new Time(Options.SHOW_FPS);
 
         while (true) {
             display.getInput().update(time.getDelta());
             game.update(display.getInput());
-            game.render(renderTarget);
+            display.render();
             display.swapBuffers();
             time.sleep(1);
         }

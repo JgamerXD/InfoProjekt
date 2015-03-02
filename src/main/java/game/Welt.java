@@ -51,7 +51,7 @@ public class Welt {
 
     public void render(RenderContext ctx)
     {
-        AABB renderArea = ctx.getRenderArea();
+        AABB renderArea = new AABB(-100,-100,100,100);//ctx.getRenderArea();
         int minx = Util.clamp((int) renderArea.minX, 0,width-1);
         int miny = Util.clamp((int)renderArea.minY,0,height-1);
         int maxx = Util.clamp((int)renderArea.maxX +1,0,width-1);

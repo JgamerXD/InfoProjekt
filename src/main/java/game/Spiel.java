@@ -3,12 +3,14 @@ package game;
 import engine.Game;
 import engine.Input;
 import engine.Quadtree;
+import engine.ResourceManager;
 import engine.entity.EntitySprite;
 import engine.physics.AABB;
 import engine.physics.Transform;
 import engine.rendering.*;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.image.renderable.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,16 +27,17 @@ public class Spiel implements Game {
     Quadtree tree;
 
     Welt welt;
-    Spritesheet sprites = new Spritesheet(new Bitmap("/textures/goodly.png"),16,16);
-    SpritesheetSprite sprite = new SpritesheetSprite(sprites,70);
-    SpritesheetSprite sprite2 = new SpritesheetSprite(sprites,137);
+    Spritesheet sprites = new Spritesheet(ResourceManager.loadImage("/textures/goodly.png"),16,16);
+    SpritesheetSprite sprite = new SpritesheetSprite(sprites,2);
+    SpritesheetSprite sprite2 = new SpritesheetSprite(sprites,17);
+//    EntitySprite e1 = new EntitySprite(new AABB(0,0,200,200),new Transform(new Vec2d(500,500)),sprite);
+//    EntitySprite e2 = new EntitySprite(new AABB(0,0,100,100),new Transform(new Vec2d(100,100)),sprite2);
 
     public Spiel()
     {
         tree = new Quadtree(new AABB(-1,-1,1,1));
 
-//        EntitySprite e1 = new EntitySprite(new AABB(0,0,1,1),Transform.DEFAULT,sprite);
-//        EntitySprite e2 = new EntitySprite(new AABB(0,0,0.5,0.5),new Transform(new Vec2d(-0.5,0)),sprite2);
+
 //        tree.addEntity(e1);
 //        tree.addEntity(e2);
 
@@ -62,6 +65,9 @@ public class Spiel implements Game {
         tree.queryRange(new AABB(-1,-1,1,1),renderable);
 
         welt.render(ctx);
+//        e1.getSprite().draw(ctx,e1.transform.pos.x,e1.transform.pos.y,e1.getWidth(),e1.getHeight());
+//        e2.getSprite().draw(ctx,e2.transform.pos.x,e2.transform.pos.y,e2.getWidth(),e2.getHeight());
+
 
         for(EntitySprite e:renderable)
         {
