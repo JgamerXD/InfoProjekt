@@ -31,8 +31,10 @@ public class RenderContext
 
     public void update(Graphics2D g2d, int height, int width) {
         this.g2d = g2d;
+        //g2d.getTransform().concatenate(camera);
         this.width = width;
         this.height = height;
+        //System.out.println(width + "  " + height);
     }
 
 

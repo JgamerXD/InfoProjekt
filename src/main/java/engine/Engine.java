@@ -28,6 +28,7 @@ public class Engine {
     {
         Options.save();
         Display display = new Display(game,Options.RES_X, Options.RES_Y, "Info Projekt");
+        display.setBackground(Options.BACKGROUND);
 
         if(cam != null)
             display.cam = cam;

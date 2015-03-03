@@ -162,6 +162,8 @@ public class Configuration {
             }
             catch(Exception e)
             {
+            	//e.printStackTrace();
+            	//System.exit(1);
                 setColor(key, defaultValue);
                 return defaultValue;
             }
@@ -172,6 +174,6 @@ public class Configuration {
     }
     public void setColor(String key, Color value)
     {
-        properties.setProperty(key,Integer.toHexString(value.getRGB()));
+        properties.setProperty(key,String.format("0x%02x%02x%02x",value.getRed(),value.getGreen(),value.getBlue()));
     }
 }

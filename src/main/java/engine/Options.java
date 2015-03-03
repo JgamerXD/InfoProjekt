@@ -1,5 +1,7 @@
 package engine;
 
+import java.awt.Color;
+
 import engine.config.Configuration;
 
 /**
@@ -14,6 +16,8 @@ public class Options {
 
     public static boolean   SHOW_FPS    = config.getBoolean("showFPS", false);
     public static boolean   DEBUG       = config.getBoolean("debug" , false);
+    
+    public static Color BACKGROUND 		= config.getColor("background", new Color(0x60,0x80,0xFF));
 
     public static void save()
     {

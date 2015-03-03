@@ -2,6 +2,7 @@ package engine.physics;
 
 import engine.math.Vec2d;
 
+
 /**
  * Created by Jan on 13.02.2015.
  */
@@ -21,6 +22,6 @@ public class Circle implements Shape {
 
     @Override
     public Vec2d getCenter(Transform t) {
-        return new Vec2d(pos).translate(t.pos);
+        return new Vec2d(pos).add(t.pos);
     }
 }
