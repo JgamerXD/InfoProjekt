@@ -13,7 +13,7 @@ import java.awt.geom.Point2D;
  */
 public class RenderContext
 {
-    private Camera camera = new Camera(0.5, new Vec2d(50,400));
+    private static Camera camera = new Camera(50, new Vec2d(1,5));
     public Graphics2D g2d;
     public int width, height;
 
@@ -21,8 +21,8 @@ public class RenderContext
         return camera;
     }
 
-    public void setCamera(Camera camera) {
-        this.camera = camera;
+    public static void setCamera(Camera cam) {
+        camera = cam;
     }
 
     public Graphics2D getG2d() {
@@ -41,9 +41,9 @@ public class RenderContext
     public void drawImage(Image image, double xCenter, double yCenter, double width, double height) {
         Point2D pos = new Point2D.Double(xCenter,yCenter);
         camera.transform(pos,pos);
-        width /= camera.getScaleX();
-        height /= camera.getScaleY();
-        g2d.drawImage(image, (int) (xCenter - width), (int) (yCenter - height), (int) (xCenter + width), (int) (yCenter + height), null);
+        width *= camera.getScaleX();
+        height *= camera.getScaleY();
+        g2d.drawImage(image,(int)(pos.getX()),(int)(pos.getY()),(int)width,(int)(height), null);
     }
     public void drawImage(Image image, double xCenter, double yCenter, double width, double height,
                           int imageXStart, int imageYStart, int imageXEnd, int imageYEnd) {

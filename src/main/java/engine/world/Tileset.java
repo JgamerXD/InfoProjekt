@@ -1,4 +1,4 @@
-package game.welt;
+package engine.world;
 
 import engine.rendering.Spritesheet;
 import engine.rendering.SpritesheetSprite;

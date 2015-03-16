@@ -90,6 +90,7 @@ public class Display extends Canvas {
                 // Get a new graphics context every time through the loop
                 // to make sure the strategy is validated
                 Graphics graphics = bufferStrategy.getDrawGraphics();
+                graphics.clearRect(0,0,getWidth(),getHeight());
 
                 // Render to graphics
                 // ...

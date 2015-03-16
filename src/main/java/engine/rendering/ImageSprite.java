@@ -19,6 +19,6 @@ public class ImageSprite extends Sprite{
     }
 
     public void draw(RenderContext ctx, double xCenter, double yCenter, double width, double height) {
-        ctx.getG2d().drawImage(image,(int)xCenter,(int)yCenter,(int)width,(int)height,null);
+        ctx.drawImage(image,xCenter,yCenter,width,height);
     }
 }

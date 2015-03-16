@@ -30,6 +30,12 @@ public class Vec2d {
         y += translation.y;
         return this;
     }
+    public Vec2d add(double x,double y)
+    {
+        this.x += x;
+        this.y += y;
+        return this;
+    }
     public Vec2d sub(Vec2d translation)
     {
         x -= translation.x;
@@ -39,6 +45,10 @@ public class Vec2d {
      
     public double length() {
        return Math.sqrt(x*x+y*y);
+    }
+
+    public double lengthSq() {
+        return x*x+y*y;
     }
 
     public Vec2d scale( double scaleFactor ) {

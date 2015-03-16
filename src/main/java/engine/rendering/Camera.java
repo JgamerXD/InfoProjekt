@@ -22,7 +22,15 @@ public class Camera extends AffineTransform{
     public Camera(double scale,Vec2d translation)
 	{
         setToIdentity();
-        scale(scale,scale);
         translate(translation.x,translation.y);
+        scale(scale,scale);
+
 	}
+
+    public void setPos(double x,double y)
+    {
+        //TODO: find a working solution
+        translate(getTranslateX() - x * getScaleX(),getTranslateY()-y * getScaleY());
+
+    }
 }
