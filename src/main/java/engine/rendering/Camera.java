@@ -22,8 +22,9 @@ public class Camera extends AffineTransform{
     public Camera(double scale,Vec2d translation)
 	{
         setToIdentity();
-        translate(translation.x,translation.y);
         scale(scale,scale);
+        translate(translation.x,translation.y);
+
 
 	}
 

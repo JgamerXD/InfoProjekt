@@ -27,19 +27,22 @@ public class Entity {
     //How much is the Entity affected by external forces (e.g. gravity)
     double forceScale = 1.0;
 
+    boolean onGround = false;
+
     Sprite sprite;
     AABB bounds =  new AABB(0,0,1,1);
 
 
     public void update(Input input)
     {
+        onGround = false;
         //start Movement
         dx = 0.0;
         dy = 0.0;
 
 
         vel.add(acc.scale(input.getDelta()));
-        vel.add(world.getForce((int)(transform.pos.x),(int)(transform.pos.y)).scale(forceScale));
+        vel.add(world.getForce((int)(transform.pos.x),(int)(transform.pos.y)).scale(forceScale).scale(input.getDelta()));
 
 
         vel = vel.scale(1 - 0.10 * input.getDelta());
@@ -55,13 +58,19 @@ public class Entity {
 
 
         dx = getMovDistX(dMov.x);
-        if(Math.abs(dx) < Math.abs(dMov.x))
+        if(Math.abs(dx) < Math.abs(dMov.x) || Math.signum(dx) != Math.signum(dMov.x))
             vel.x = 0.0;
-        dy = getMovDistY(dMov.y);
-        if(Math.abs(dy) < Math.abs(dMov.y))
-            vel.y = 0.0;
+        transform.pos.x += dx;
 
-        transform.pos.add(dx,dy);
+        dy = getMovDistY(dMov.y);
+        if(Math.abs(dy) < Math.abs(dMov.y) || Math.signum(dy) != Math.signum(dMov.y)) {
+            vel.y = 0.0;
+            if (dMov.y > 0)
+                onGround = true;
+        }
+        transform.pos.y += dy;
+
+
 
 
 
@@ -75,7 +84,7 @@ public class Entity {
 
     public boolean onGround()
     {
-        return false;
+        return onGround;
         //TODO: Implement
     }
 
@@ -114,6 +123,8 @@ public class Entity {
                     if(world.getTileAt(i,j).isSolid())
                     {
                         dist = Math.min(i - startXT - x % 1 ,dist);
+                        if(dist < 0)
+                            dist = 0;
                     }
                 }
             }
@@ -127,6 +138,8 @@ public class Entity {
                     if(world.getTileAt(i,j).isSolid())
                     {
                         dist = Math.max(i - startXT + 1 - x % 1,dist);
+                        if(dist > 0)
+                            dist = 0;
                     }
                 }
             }
@@ -170,6 +183,8 @@ public class Entity {
                         if(world.getTileAt(j,i).isSolid())
                         {
                             dist = Math.min(i - startYT - y % 1 ,dist);
+                            if(dist < 0)
+                                dist = 0;
                         }
                     }
                 }
@@ -183,6 +198,8 @@ public class Entity {
                         if(world.getTileAt(j,i).isSolid())
                         {
                             dist = Math.max(i - startYT + 1 - y % 1,dist);
+                            if(dist > 0)
+                                dist = 0;
                         }
                     }
                 }

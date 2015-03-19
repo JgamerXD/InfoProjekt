@@ -19,12 +19,15 @@ import java.awt.event.KeyEvent;
  */
 public class Player extends Entity{
 
+    double controlFactor = 2;
+    double runningSpeed = 10;
+    double runAcc = 10;
     public Player(World welt)
     {
-        transform = new Transform(new Vec2d(9,2));
+        transform = new Transform(new Vec2d(19,2));
         world = welt;
         sprite = new ImageSprite(ResourceManager.loadImage("/textures/Player.png"));
-        forceScale = 0;
+        forceScale = 1;
         bounds = new AABB(0,0,1,2);
     }
 
@@ -33,23 +36,30 @@ public class Player extends Entity{
         super.update(input);
         if(input.getKey(KeyEvent.VK_A))
         {
-            vel.add(new Vec2d(-10,0).scale(input.getDelta()));
+            Vec2d mov = new Vec2d(-runningSpeed * 2 - vel.x,0).scale(input.getDelta());
+            if(vel.x > 0)
+                mov.scale(controlFactor);
+            vel.add(mov);
         }
         if(input.getKey(KeyEvent.VK_D))
         {
-            vel.add(new Vec2d(10,0).scale(input.getDelta()));
+            Vec2d mov = new Vec2d(runningSpeed * 2 - vel.x,0).scale(input.getDelta());
+            if(vel.x < 0)
+                mov.scale(controlFactor);
+            vel.add(mov);
         }
-        if(input.getKey(KeyEvent.VK_W))
+//        if(input.getKey(KeyEvent.VK_W))
+//        {
+//
+//            vel.add(new Vec2d(0,-10).scale(input.getDelta()));
+//        }
+//        if(input.getKey(KeyEvent.VK_S))
+//        {
+//            vel.add(new Vec2d(0,10).scale(input.getDelta()));
+//        }
+        if(input.getKey(KeyEvent.VK_SPACE) && onGround())
         {
-            vel.add(new Vec2d(0,-10).scale(input.getDelta()));
-        }
-        if(input.getKey(KeyEvent.VK_S))
-        {
-            vel.add(new Vec2d(0,10).scale(input.getDelta()));
-        }
-        if(input.getKey(KeyEvent.VK_SPACE))
-        {
-            vel.add(new Vec2d(0,-100).scale(input.getDelta()));
+            vel.add(new Vec2d(0,-10));
         }
     }
 }

@@ -55,7 +55,7 @@ public class Spiel implements Game {
 
 
         welt.setTiles(new Tileset(sprites,256,0),1);
-        Camera cam = new Camera(20,new Vec2d(0,0));
+        Camera cam = new Camera(10,new Vec2d(0,0));
         player = new Player(welt);
         RenderContext.setCamera(cam);
 
