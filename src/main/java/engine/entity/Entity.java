@@ -47,6 +47,7 @@ public class Entity {
 
         vel = vel.scale(1 - 0.10 * input.getDelta());
 
+
 //        vel.x = Util.clamp(vel.x, -10, 10);
 //        vel.y = Util.clamp(vel.y,-10,10);
         if(Math.abs(vel.x) < 0.04)
@@ -69,11 +70,6 @@ public class Entity {
                 onGround = true;
         }
         transform.pos.y += dy;
-
-
-
-
-
     }
 
 
@@ -101,7 +97,7 @@ public class Entity {
         //intersecting tiles
         int minYT, maxYT,startXT, endXT;
         minYT = (int)(bounds.minY + transform.pos.y);
-        maxYT = (int)(bounds.maxY + transform.pos.y);
+        maxYT = (int)(bounds.maxY + transform.pos.y - 0.00000000001);
 
         double x = (dist > 0 ? bounds.maxX : bounds.minX);
         x +=  transform.pos.x;
@@ -118,7 +114,7 @@ public class Entity {
         {
             for(int i = startXT; i <= endXT; i++)
             {
-                for(int j = minYT;j <= maxYT; j++)
+                for(int j = minYT; j <= maxYT; j++)
                 {
                     if(world.getTileAt(i,j).isSolid())
                     {
@@ -133,7 +129,7 @@ public class Entity {
         {
             for(int i = startXT; i >= endXT; i--)
             {
-                for(int j = minYT;j <= maxYT; j++)
+                for(int j = minYT; j <= maxYT; j++)
                 {
                     if(world.getTileAt(i,j).isSolid())
                     {
@@ -161,7 +157,7 @@ public class Entity {
             //intersecting tiles
             int minXT, maxXT,startYT, endYT;
             minXT = (int)(bounds.minX + transform.pos.x);
-            maxXT = (int)(bounds.maxX + transform.pos.x);
+            maxXT = (int)(bounds.maxX + transform.pos.x - 0.00000000001);
 
             double y = (dist > 0 ? bounds.maxY : bounds.minY);
             y +=  transform.pos.y;
@@ -178,7 +174,7 @@ public class Entity {
             {
                 for(int i = startYT; i <= endYT; i++)
                 {
-                    for(int j = minXT;j <= maxXT; j++)
+                    for(int j = minXT; j <= maxXT; j++)
                     {
                         if(world.getTileAt(j,i).isSolid())
                         {
@@ -193,7 +189,7 @@ public class Entity {
             {
                 for(int i = startYT; i >= endYT; i--)
                 {
-                    for(int j = minXT;j <= maxXT; j++)
+                    for(int j = minXT; j <= maxXT; j++)
                     {
                         if(world.getTileAt(j,i).isSolid())
                         {
